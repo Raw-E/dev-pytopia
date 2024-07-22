@@ -1,0 +1,15 @@
+# Pre-commit configuration for Python code quality checks
+# To run on all files: pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: 'v0.3.4'
+    hooks:
+      # Run Ruff linter with auto-fix enabled
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      # Run Ruff formatter
+      - id: ruff-format
+
+# TODO: Consider adding additional hooks for security checks
+# IDEA: Explore integrating mypy for static type checking

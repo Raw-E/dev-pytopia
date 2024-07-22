@@ -1,0 +1,41 @@
+[tool.poetry]
+    name = "pytopia"
+    version = "0.1.0"
+    description = ""
+    authors = ["Blake Larson <wokebloke@icloud.com>"]
+    readme = "README.md"
+    packages = [
+        { include = "pytopia", from = "src" }
+    ]
+
+[tool.poetry.dependencies]
+    python = "^3.12.4"
+    operation-framework = { path = "../../../Operation-Framework", develop = true }
+    universal-utilities = { path = "../../../Universal-Utilities", develop = true }
+
+[tool.poetry.group.dev.dependencies]
+    pre-commit = "*"
+    pytest = "*"
+    pytest-asyncio = "*"
+    ruff = "*"
+
+[tool.pytest.ini_options]
+    addopts = "-v -s"
+    log_cli = false
+    log_cli_level = "DEBUG"
+    pythonpath = ["src"]
+    asyncio_mode = "auto"
+    testpaths = ["tests"]
+    markers = [
+        "quicktest: mark a test as a quick test",
+    ]
+
+[tool.ruff]
+    line-length = 100
+
+[tool.ruff.lint]
+    select = ["E", "F", "I"]
+
+[build-system]
+    requires = ["poetry-core"]
+    build-backend = "poetry.core.masonry.api"
