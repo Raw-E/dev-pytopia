@@ -1,41 +1,57 @@
 [tool.poetry]
-    name = "pytopia"
-    version = "0.1.0"
-    description = ""
-    authors = ["Blake Larson <wokebloke@icloud.com>"]
-    readme = "README.md"
-    packages = [
-        { include = "pytopia", from = "src" }
-    ]
+name = "dev-pytopia"
+version = "0.1.0"
+description = ""
+authors = ["Blake Larson <wokebloke@icloud.com>"]
+readme = "README.md"
+packages = [
+    { include = "dev_pytopia", from = "source_code" }
+]
 
 [tool.poetry.dependencies]
-    python = "^3.12.4"
-    operation-framework = { path = "../../../Operation-Framework", develop = true }
-    universal-utilities = { path = "../../../Universal-Utilities", develop = true }
+foundation = { path = "../Foundation", develop = true }
+python = ">=3.12"
+typing-extensions = "^4.9.0"
+aiofiles = "^24.1.0"
+colorama = "^0.4.6"
+orjson = "^3.9.15"
+pymongo = ">=4.9.2"
+motor = "^3.3.2"
+pynput = "^1.7.6"
+openai = "^1.14.0"
+python-dotenv = "^1.0.1"
 
 [tool.poetry.group.dev.dependencies]
-    pre-commit = "*"
-    pytest = "*"
-    pytest-asyncio = "*"
-    ruff = "*"
+pytest = "^8.0.0"
+pytest-asyncio = "^0.23.5"
 
 [tool.pytest.ini_options]
-    addopts = "-v -s"
-    log_cli = false
-    log_cli_level = "DEBUG"
-    pythonpath = ["src"]
-    asyncio_mode = "auto"
-    testpaths = ["tests"]
-    markers = [
-        "quicktest: mark a test as a quick test",
-    ]
+addopts = "-v -s"
+pythonpath = ["source_code"]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "quicktest: mark a test as a quick test",
+]
 
 [tool.ruff]
-    line-length = 100
+line-length = 115
+src = ["source_code"]
 
 [tool.ruff.lint]
-    select = ["E", "F", "I"]
+select = ["F", "E", "I"]
+ignore = ["E501"]
+per-file-ignores = { "__init__.py" = ["F401"] }
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+combine-as-imports = true
+split-on-trailing-comma = true
+relative-imports-order = "closest-to-furthest"
+known-first-party = [
+    "foundation"
+]
 
 [build-system]
-    requires = ["poetry-core"]
-    build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
